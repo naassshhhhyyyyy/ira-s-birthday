@@ -62,7 +62,7 @@ function nextPage() {
 
 // ========== COUNTDOWN ==========
 function startCountdown() {
-  const targetDate = new Date("April 21, 2026 21:05:00").getTime();
+  const targetDate = new Date("May 19, 2026 00:00:00").getTime();
 
   const timer = setInterval(() => {
     const now = new Date().getTime();
