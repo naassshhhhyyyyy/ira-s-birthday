@@ -39,7 +39,7 @@ function goToPage(pageNum) {
   if (currentPage === 3 && !typingFlags[3]) {
     startTyping(
       'message3',
-      "Happy 19th Birthday 💖 Wishing you a day filled with laughter, love, and unforgettable memories. May this year bring you endless joy, exciting adventures, and dreams coming true ✨",
+      "Happy Birthday, Sai! Wishing you the best this year and sana maabot mo pangarap mo.",
       'nextMsg3Btn',
       3
     );
@@ -48,7 +48,7 @@ function goToPage(pageNum) {
   else if (currentPage === 4 && !typingFlags[5]) {
     startTyping(
       'typing',
-      "Eden Ira, you are one of the most amazing people I've ever known.\n\nYour smile lights up every room, your kindness touches every heart, and your energy makes life feel magical. At 19, I know incredible adventures, love, laughter, and growth are all waiting for you. Keep shining, keep dreaming, and never forget how much you are loved and cherished. You make the world a brighter place just by being in it, and I feel so lucky to celebrate this special day with you.\n\nHappy Birthday! 💖✨🎉",
+      "Hello! First of all, ginawa ko ’to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday kasi you are 19 years old living in this world, sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you a good health, and malusog. \n\n Sana sa age mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy. Nandito lang din mga tao na nagmamalasakit sa’yo, kaya wag mong kalimutan na alagaan din sarili mo. \n\n Sana matupad mo yung mga goals at dreams mo sa buhay, kahit unti-unti lang. Hindi kailangang madali, basta tuloy-tuloy lang. Always believe in yourself kahit may times na parang hindi mo kaya. \n\n Happy Birthday! 💖✨🎉\n Enjoy your day, you deserve it!",
       'nextTypingBtn',
       5
     );
