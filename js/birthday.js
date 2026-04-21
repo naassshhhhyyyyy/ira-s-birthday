@@ -22,7 +22,6 @@ const themeToggleBtn = document.getElementById('themeToggle');
 function goToPage(pageNum) {
   if (pageNum > totalPages) return;
 
-  // Hide all pages safely
   pages.forEach(page => {
     page.classList.remove('active');
     page.classList.add('prev');
@@ -101,7 +100,8 @@ function startTyping(elementId, message, btnId, flagKey) {
 
       typingFlags[flagKey] = true;
 
-      if (flagKey === 5 && spotifyContainer) {
+      // ✅ Spotify ONLY after gift typing finishes
+      if (flagKey === 6 && spotifyContainer) {
         spotifyContainer.classList.add('show');
       }
     }
@@ -150,7 +150,6 @@ function handleGiftOpen(e) {
         null,
         6
       );
-      typingFlags[6] = true;
     }
   }, { once: true });
 }
