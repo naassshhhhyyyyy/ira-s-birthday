@@ -6,6 +6,11 @@ const totalPages = pages.length;
 let typingFlags = { 3: false, 5: false, 6: false };
 let cakeClicked = false;
 
+// 🔒 SECURITY
+let isUnlocked = false;
+let lastTimeCheck = Date.now();
+const targetDate = new Date("May 19, 2026 00:00:00").getTime();
+
 // DOM elements
 const countEl = document.getElementById('count');
 const cakeDiv = document.getElementById('cake');
@@ -18,8 +23,38 @@ const spotifyContainer = document.getElementById('spotifyContainer');
 const birthdaySong = document.getElementById('birthdaySong');
 const themeToggleBtn = document.getElementById('themeToggle');
 
+// ========== TIME VALIDATION ==========
+function validateTime() {
+  const now = Date.now();
+
+  if (now < lastTimeCheck - 5000) {
+    console.warn("⚠️ Time tampering detected!");
+
+    isUnlocked = false;
+
+    // Reset to page 1
+    currentPage = 1;
+    pages.forEach((page, index) => {
+      page.classList.remove('active');
+      page.classList.add('prev');
+
+      if (index === 0) {
+        page.classList.add('active');
+        page.classList.remove('prev');
+      }
+    });
+  }
+
+  lastTimeCheck = now;
+}
+
+setInterval(validateTime, 2000);
+
 // ========== PAGE TRANSITION ==========
 function goToPage(pageNum) {
+  validateTime();
+
+  if (!isUnlocked && pageNum !== 1) return;
   if (pageNum > totalPages) return;
 
   pages.forEach(page => {
@@ -35,7 +70,6 @@ function goToPage(pageNum) {
 
   currentPage = pageNum;
 
-  // Page-specific actions
   if (currentPage === 3 && !typingFlags[3]) {
     startTyping(
       'message3',
@@ -48,7 +82,7 @@ function goToPage(pageNum) {
   else if (currentPage === 4 && !typingFlags[5]) {
     startTyping(
       'typing',
-      "Hello! First of all, ginawa ko ’to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday kasi you are 19 years old living in this world, sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you a good health, and malusog. \n\n Sana sa age mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy. Nandito lang din mga tao na nagmamalasakit sa’yo, kaya wag mong kalimutan na alagaan din sarili mo. \n\n Sana matupad mo yung mga goals at dreams mo sa buhay, kahit unti-unti lang. Hindi kailangang madali, basta tuloy-tuloy lang. Always believe in yourself kahit may times na parang hindi mo kaya. \n\n Happy Birthday! 💖✨🎉\n Enjoy your day, you deserve it!",
+      "Hello! First of all, ginawa ko ’to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday kasi you are 19 years old living in this world, sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you a good health, and malusog.\n\nSana sa age mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy.\n\nHappy Birthday! 💖✨🎉",
       'nextTypingBtn',
       5
     );
@@ -57,31 +91,29 @@ function goToPage(pageNum) {
 
 // Next page
 function nextPage() {
+  if (!isUnlocked) return;
   goToPage(currentPage + 1);
 }
 
 // ========== COUNTDOWN ==========
 function startCountdown() {
-  const targetDate = new Date("May 19, 2026 00:00:00").getTime();
-
   const timer = setInterval(() => {
-    const now = new Date().getTime();
+    const now = Date.now();
     const distance = targetDate - now;
 
-    // If it's already May 14 or past
     if (distance <= 0) {
       clearInterval(timer);
-      startFinalCountdown(); // 🔥 trigger your old 3..2..1
+
+      isUnlocked = true; // 🔓 UNLOCK
+      startFinalCountdown();
       return;
     }
 
-    // Time calculations
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((distance / (1000 * 60)) % 60);
     const seconds = Math.floor((distance / 1000) % 60);
 
-    // Display countdown
     countEl.innerHTML = `
       <div style="font-size:2rem">${days}d</div>
       <div style="font-size:2rem">${hours}h ${minutes}m</div>
@@ -97,18 +129,16 @@ function startFinalCountdown() {
   const timer = setInterval(() => {
     count--;
 
-    if (count >= 0) {
-      countEl.textContent = count;
-    }
+    if (count >= 0) countEl.textContent = count;
 
     if (count < 0) {
       clearInterval(timer);
-      goToPage(2); // 🎉 start your birthday pages
+      goToPage(2);
     }
   }, 1000);
 }
 
-// ========== TYPING EFFECT ==========
+// ========== TYPING ==========
 function startTyping(elementId, message, btnId, flagKey) {
   const element = document.getElementById(elementId);
   if (!element) return;
@@ -129,7 +159,6 @@ function startTyping(elementId, message, btnId, flagKey) {
 
       typingFlags[flagKey] = true;
 
-      // ✅ Spotify ONLY after gift typing finishes
       if (flagKey === 6 && spotifyContainer) {
         spotifyContainer.classList.add('show');
       }
@@ -139,8 +168,10 @@ function startTyping(elementId, message, btnId, flagKey) {
   typeChar();
 }
 
-// ========== CAKE CLICK ==========
+// ========== CAKE ==========
 function handleCakeClick(e) {
+  if (!isUnlocked) return;
+
   e.stopPropagation();
 
   if (cakeDiv.textContent === "🧁") {
@@ -148,20 +179,16 @@ function handleCakeClick(e) {
     nextCakeBtn.disabled = false;
 
     if (!cakeClicked) {
-      birthdaySong.play().catch(() => {
-        document.body.addEventListener('click', function playOnce() {
-          birthdaySong.play().catch(() => {});
-          document.body.removeEventListener('click', playOnce);
-        }, { once: true });
-      });
-
+      birthdaySong.play().catch(() => {});
       cakeClicked = true;
     }
   }
 }
 
-// ========== GIFT OPEN ==========
+// ========== GIFT ==========
 function handleGiftOpen(e) {
+  if (!isUnlocked) return;
+
   e.stopPropagation();
 
   if (!giftBox || giftBox.classList.contains('flyAway')) return;
@@ -175,7 +202,7 @@ function handleGiftOpen(e) {
     if (!typingFlags[6]) {
       startTyping(
         'giftText',
-        "Surprise! 🎉 You are truly special and loved 💕 Every moment with you is a treasure. May this year overflow with happiness! 🌟",
+        "Surprise! 🎉 You are truly special and loved 💕",
         null,
         6
       );
@@ -183,7 +210,7 @@ function handleGiftOpen(e) {
   }, { once: true });
 }
 
-// ========== DARK MODE ==========
+// ========== THEME ==========
 function toggleTheme() {
   document.body.classList.toggle('dark');
   themeToggleBtn.textContent =
@@ -198,7 +225,7 @@ document.addEventListener('touchstart', (e) => {
 });
 
 document.addEventListener('touchend', (e) => {
-  if (currentPage >= totalPages) return;
+  if (!isUnlocked) return;
 
   const touchEnd = e.changedTouches[0].clientX;
 
@@ -209,59 +236,62 @@ document.addEventListener('touchend', (e) => {
 
 // ========== KEYBOARD ==========
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-    e.preventDefault();
-  }
+  if (!isUnlocked) return;
 
   if (e.key === 'ArrowRight' && currentPage < totalPages) {
-    let canProceed = true;
-
-    if (currentPage === 2 && nextCakeBtn.disabled) canProceed = false;
-    if (currentPage === 3 && nextMsg3Btn.disabled) canProceed = false;
-    if (currentPage === 4 && nextTypingBtn.disabled) canProceed = false;
-
-    if (canProceed) nextPage();
+    nextPage();
   }
 });
 
+// ========== ANTI-INSPECT ==========
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+document.addEventListener('keydown', function (e) {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
+    (e.ctrlKey && e.key === 'U')
+  ) {
+    e.preventDefault();
+  }
+});
+
+// ========== DEVTOOLS DETECT ==========
+setInterval(() => {
+  const devtoolsOpen =
+    window.outerWidth - window.innerWidth > 160 ||
+    window.outerHeight - window.innerHeight > 160;
+
+  if (devtoolsOpen) {
+    document.body.innerHTML = `
+      <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins;text-align:center;">
+        <div>
+          <h1>🚫 Access Denied</h1>
+          <p>Nice try 😏</p>
+        </div>
+      </div>
+    `;
+  }
+}, 1000);
+
 // ========== EVENTS ==========
-if (cakeDiv) {
-  cakeDiv.addEventListener('click', handleCakeClick);
-  cakeDiv.addEventListener('touchstart', handleCakeClick);
-}
+cakeDiv?.addEventListener('click', handleCakeClick);
+nextCakeBtn?.addEventListener('click', nextPage);
+nextMsg3Btn?.addEventListener('click', nextPage);
+nextTypingBtn?.addEventListener('click', nextPage);
+giftBox?.addEventListener('click', handleGiftOpen);
+themeToggleBtn?.addEventListener('click', toggleTheme);
 
-if (nextCakeBtn) nextCakeBtn.addEventListener('click', nextPage);
-if (nextMsg3Btn) nextMsg3Btn.addEventListener('click', nextPage);
-if (nextTypingBtn) nextTypingBtn.addEventListener('click', nextPage);
-
-if (giftBox) {
-  giftBox.addEventListener('click', handleGiftOpen);
-  giftBox.addEventListener('touchstart', handleGiftOpen);
-}
-
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', toggleTheme);
-}
-
-// ========== INITIALIZE ==========
+// ========== INIT ==========
 pages.forEach((page, index) => {
   if (index === 0) {
     page.classList.add('active');
     page.classList.remove('prev');
   } else {
-    page.classList.remove('active');
     page.classList.add('prev');
   }
 });
 
-// Start countdown
 startCountdown();
 
-// Enable audio preload
-document.body.addEventListener('click', function () {
-  if (birthdaySong && birthdaySong.paused && !cakeClicked) {
-    birthdaySong.load();
-  }
-}, { once: true });
-
-console.log("Ready! Click the cupcake 🧁 to start the party!");
+console.log("🔒 Locked until birthday...");
