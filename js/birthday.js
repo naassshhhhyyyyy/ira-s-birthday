@@ -62,6 +62,35 @@ function nextPage() {
 
 // ========== COUNTDOWN ==========
 function startCountdown() {
+  const targetDate = new Date("April 21, 2026 21:05:00").getTime();
+
+  const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    // If it's already May 14 or past
+    if (distance <= 0) {
+      clearInterval(timer);
+      startFinalCountdown(); // 🔥 trigger your old 3..2..1
+      return;
+    }
+
+    // Time calculations
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    // Display countdown
+    countEl.innerHTML = `
+      <div style="font-size:2rem">${days}d</div>
+      <div style="font-size:2rem">${hours}h ${minutes}m</div>
+      <div style="font-size:3rem">${seconds}s</div>
+    `;
+  }, 1000);
+}
+
+function startFinalCountdown() {
   let count = 3;
   countEl.textContent = count;
 
@@ -74,7 +103,7 @@ function startCountdown() {
 
     if (count < 0) {
       clearInterval(timer);
-      goToPage(2);
+      goToPage(2); // 🎉 start your birthday pages
     }
   }, 1000);
 }
