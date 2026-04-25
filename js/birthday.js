@@ -23,6 +23,146 @@ const spotifyContainer = document.getElementById('spotifyContainer');
 const birthdaySong = document.getElementById('birthdaySong');
 const themeToggleBtn = document.getElementById('themeToggle');
 
+// ========== SUPER ANTI-DEVTOOLS ==========
+
+// 1. Disable right click completely
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  return false;
+});
+
+// 2. Disable all keyboard shortcuts for devtools
+document.addEventListener('keydown', function(e) {
+  const key = e.key;
+  const ctrl = e.ctrlKey;
+  const shift = e.shiftKey;
+  
+  // F12
+  if (key === 'F12') {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (ctrl && shift && (key === 'I' || key === 'J' || key === 'C')) {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+U (view source)
+  if (ctrl && key === 'u') {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+Shift+K (Firefox)
+  if (ctrl && shift && key === 'K') {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+Shift+E (Firefox)
+  if (ctrl && shift && key === 'E') {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+S (save)
+  if (ctrl && key === 's') {
+    e.preventDefault();
+    return false;
+  }
+  // Ctrl+P (print)
+  if (ctrl && key === 'p') {
+    e.preventDefault();
+    return false;
+  }
+  // Command+Option+I (Mac)
+  if (e.metaKey && e.altKey && key === 'i') {
+    e.preventDefault();
+    return false;
+  }
+  // Command+Option+J (Mac)
+  if (e.metaKey && e.altKey && key === 'j') {
+    e.preventDefault();
+    return false;
+  }
+  // Command+Option+C (Mac)
+  if (e.metaKey && e.altKey && key === 'c') {
+    e.preventDefault();
+    return false;
+  }
+  // Command+U (Mac)
+  if (e.metaKey && key === 'u') {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// 3. Disable inspect element via debugger loop
+setInterval(function() {
+  debugger;
+}, 100);
+
+// 4. Disable console methods
+console.log = function() {};
+console.warn = function() {};
+console.error = function() {};
+console.info = function() {};
+console.debug = function() {};
+console.table = function() {};
+
+// 5. Detect devtools opening via width/height difference
+let devtoolsOpen = false;
+const devtoolsChecker = setInterval(function() {
+  const widthDiff = window.outerWidth - window.innerWidth > 160;
+  const heightDiff = window.outerHeight - window.innerHeight > 160;
+  
+  if ((widthDiff || heightDiff) && !devtoolsOpen) {
+    devtoolsOpen = true;
+    document.body.innerHTML = `
+      <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins;text-align:center;background:#020617;color:white;flex-direction:column;padding:20px;">
+        <div>
+          <h1 style="font-size:2rem;margin-bottom:20px;">🚫 Access Denied</h1>
+          <p style="margin-bottom:10px;">Please close DevTools to continue.</p>
+          <p style="font-size:0.8rem;opacity:0.7;">Let's keep the surprise magical! ✨</p>
+        </div>
+      </div>
+    `;
+  } else if (!widthDiff && !heightDiff && devtoolsOpen) {
+    devtoolsOpen = false;
+    location.reload();
+  }
+}, 1000);
+
+// 6. Disable text selection
+document.addEventListener('selectstart', function(e) {
+  e.preventDefault();
+  return false;
+});
+
+// 7. Disable copy/paste
+document.addEventListener('copy', function(e) {
+  e.preventDefault();
+  return false;
+});
+document.addEventListener('cut', function(e) {
+  e.preventDefault();
+  return false;
+});
+
+// 8. Disable dragging
+document.querySelectorAll('img, div, span, button').forEach(el => {
+  el.setAttribute('draggable', 'false');
+});
+
+// 9. Block element inspection by adding fake attributes
+const blockInspect = function() {
+  document.querySelectorAll('*').forEach(el => {
+    el.setAttribute('data-devtools-block', 'true');
+  });
+};
+setInterval(blockInspect, 500);
+
+// 10. Override console.clear to prevent clearing
+const originalClear = console.clear;
+console.clear = function() {};
+
 // ========== TIME VALIDATION ==========
 function validateTime() {
   const now = Date.now();
@@ -242,37 +382,6 @@ document.addEventListener('keydown', (e) => {
     nextPage();
   }
 });
-
-// ========== ANTI-INSPECT ==========
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-document.addEventListener('keydown', function (e) {
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
-    (e.ctrlKey && e.key === 'U')
-  ) {
-    e.preventDefault();
-  }
-});
-
-// ========== DEVTOOLS DETECT ==========
-setInterval(() => {
-  const devtoolsOpen =
-    window.outerWidth - window.innerWidth > 160 ||
-    window.outerHeight - window.innerHeight > 160;
-
-  if (devtoolsOpen) {
-    document.body.innerHTML = `
-      <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins;text-align:center;">
-        <div>
-          <h1>🚫 Access Denied</h1>
-          <p>Nice try 😏</p>
-        </div>
-      </div>
-    `;
-  }
-}, 1000);
 
 // ========== EVENTS ==========
 cakeDiv?.addEventListener('click', handleCakeClick);
