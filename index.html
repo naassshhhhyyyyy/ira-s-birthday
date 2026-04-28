@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Happy Birthday Eden Ira 🎂</title>
+  <title>Happy Birthday 🎂</title>
   <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="birthday.css">
+  <link rel="stylesheet" href="css/birthday.css">
 </head>
 <body>
+
+<button class="btn toggle" id="themeToggle">🌙</button>
 
 <!-- Page 1: Countdown -->
 <div class="page countdown-page active" id="page1">
@@ -32,7 +34,7 @@
   </div>
 </div>
 
-<!-- Page 4: Long Typing Message -->
+<!-- Page 5: Long Typing Message -->
 <div class="page" id="page4">
   <div class="card">
     <div id="typing" class="typing-long"></div>
@@ -40,10 +42,10 @@
   </div>
 </div>
 
-<!-- Page 5: Gift + Spotify typing -->
+<!-- Page 6: Gift + Spotify typing -->
 <div class="page" id="page5">
   <div class="card">
-    <h2 id="giftTitle">🎁 Tap the Gift 🎁</h2>
+    <h2 id="giftTitle">Tap the Gift 🎁</h2>
     <div id="giftBox" class="gift-box">🎁</div>
     <div id="giftText" class="typing-gift"></div>
     <div class="spotify-container" id="spotifyContainer">
@@ -56,6 +58,6 @@
   <source src="audio_chamber-music.mp3" type="audio/mpeg">
 </audio>
 
-<script src="birthday.js"></script>
+<script src="js/birthday.js"></script>
 </body>
 </html>
