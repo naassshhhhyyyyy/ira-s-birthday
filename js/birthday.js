@@ -21,147 +21,123 @@ const giftBox = document.getElementById('giftBox');
 const giftTitle = document.getElementById('giftTitle');
 const spotifyContainer = document.getElementById('spotifyContainer');
 const birthdaySong = document.getElementById('birthdaySong');
-const themeToggleBtn = document.getElementById('themeToggle');
 
-// ========== SUPER ANTI-DEVTOOLS ==========
+// ========== SUPER ANTI-DEVTOOLS (naka-comment, pwedeng ibalik) ==========
 
 // 1. Disable right click completely
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-  return false;
-});
+// document.addEventListener('contextmenu', function(e) {
+//   e.preventDefault();
+//   return false;
+// });
 
 // 2. Disable all keyboard shortcuts for devtools
-document.addEventListener('keydown', function(e) {
-  const key = e.key;
-  const ctrl = e.ctrlKey;
-  const shift = e.shiftKey;
-  
-  // F12
-  if (key === 'F12') {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
-  if (ctrl && shift && (key === 'I' || key === 'J' || key === 'C')) {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+U (view source)
-  if (ctrl && key === 'u') {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+Shift+K (Firefox)
-  if (ctrl && shift && key === 'K') {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+Shift+E (Firefox)
-  if (ctrl && shift && key === 'E') {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+S (save)
-  if (ctrl && key === 's') {
-    e.preventDefault();
-    return false;
-  }
-  // Ctrl+P (print)
-  if (ctrl && key === 'p') {
-    e.preventDefault();
-    return false;
-  }
-  // Command+Option+I (Mac)
-  if (e.metaKey && e.altKey && key === 'i') {
-    e.preventDefault();
-    return false;
-  }
-  // Command+Option+J (Mac)
-  if (e.metaKey && e.altKey && key === 'j') {
-    e.preventDefault();
-    return false;
-  }
-  // Command+Option+C (Mac)
-  if (e.metaKey && e.altKey && key === 'c') {
-    e.preventDefault();
-    return false;
-  }
-  // Command+U (Mac)
-  if (e.metaKey && key === 'u') {
-    e.preventDefault();
-    return false;
-  }
-});
+// document.addEventListener('keydown', function(e) {
+//   const key = e.key;
+//   const ctrl = e.ctrlKey;
+//   const shift = e.shiftKey;
+//   
+//   if (key === 'F12') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && shift && (key === 'I' || key === 'J' || key === 'C')) {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && key === 'u') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && shift && key === 'K') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && shift && key === 'E') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && key === 's') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (ctrl && key === 'p') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (e.metaKey && e.altKey && key === 'i') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (e.metaKey && e.altKey && key === 'j') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (e.metaKey && e.altKey && key === 'c') {
+//     e.preventDefault();
+//     return false;
+//   }
+//   if (e.metaKey && key === 'u') {
+//     e.preventDefault();
+//     return false;
+//   }
+// });
 
 // 3. Disable inspect element via debugger loop
-setInterval(function() {
-  debugger;
-}, 100);
+// setInterval(function() {
+//   debugger;
+// }, 100);
 
 // 4. Disable console methods
-console.log = function() {};
-console.warn = function() {};
-console.error = function() {};
-console.info = function() {};
-console.debug = function() {};
-console.table = function() {};
+// console.log = function() {};
+// console.warn = function() {};
+// console.error = function() {};
+// console.info = function() {};
+// console.debug = function() {};
+// console.table = function() {};
 
 // 5. Detect devtools opening via width/height difference
-let devtoolsOpen = false;
-const devtoolsChecker = setInterval(function() {
-  const widthDiff = window.outerWidth - window.innerWidth > 160;
-  const heightDiff = window.outerHeight - window.innerHeight > 160;
-  
-  if ((widthDiff || heightDiff) && !devtoolsOpen) {
-    devtoolsOpen = true;
-    document.body.innerHTML = `
-      <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins;text-align:center;background:#020617;color:white;flex-direction:column;padding:20px;">
-        <div>
-          <h1 style="font-size:2rem;margin-bottom:20px;">🚫 Access Denied</h1>
-          <p style="margin-bottom:10px;">Please close DevTools to continue.</p>
-          <p style="font-size:0.8rem;opacity:0.7;">Let's keep the surprise magical! ✨</p>
-        </div>
-      </div>
-    `;
-  } else if (!widthDiff && !heightDiff && devtoolsOpen) {
-    devtoolsOpen = false;
-    location.reload();
-  }
-}, 1000);
+// let devtoolsOpen = false;
+// const devtoolsChecker = setInterval(function() {
+//   const widthDiff = window.outerWidth - window.innerWidth > 160;
+//   const heightDiff = window.outerHeight - window.innerHeight > 160;
+//   
+//   if ((widthDiff || heightDiff) && !devtoolsOpen) {
+//     devtoolsOpen = true;
+//     document.body.innerHTML = `
+//       <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Poppins;text-align:center;background:#0a1a33;color:white;flex-direction:column;padding:20px;">
+//         <div>
+//           <h1 style="font-size:2rem;margin-bottom:20px;">🚫 Access Denied</h1>
+//           <p style="margin-bottom:10px;">Please close DevTools to continue.</p>
+//           <p style="font-size:0.8rem;opacity:0.7;">Let's keep the surprise magical! ✨</p>
+//         </div>
+//       </div>
+//     `;
+//   } else if (!widthDiff && !heightDiff && devtoolsOpen) {
+//     devtoolsOpen = false;
+//     location.reload();
+//   }
+// }, 1000);
 
 // 6. Disable text selection
-document.addEventListener('selectstart', function(e) {
-  e.preventDefault();
-  return false;
-});
+// document.addEventListener('selectstart', function(e) {
+//   e.preventDefault();
+//   return false;
+// });
 
 // 7. Disable copy/paste
-document.addEventListener('copy', function(e) {
-  e.preventDefault();
-  return false;
-});
-document.addEventListener('cut', function(e) {
-  e.preventDefault();
-  return false;
-});
+// document.addEventListener('copy', function(e) {
+//   e.preventDefault();
+//   return false;
+// });
+// document.addEventListener('cut', function(e) {
+//   e.preventDefault();
+//   return false;
+// });
 
 // 8. Disable dragging
-document.querySelectorAll('img, div, span, button').forEach(el => {
-  el.setAttribute('draggable', 'false');
-});
-
-// 9. Block element inspection by adding fake attributes
-const blockInspect = function() {
-  document.querySelectorAll('*').forEach(el => {
-    el.setAttribute('data-devtools-block', 'true');
-  });
-};
-setInterval(blockInspect, 500);
-
-// 10. Override console.clear to prevent clearing
-const originalClear = console.clear;
-console.clear = function() {};
+// document.querySelectorAll('img, div, span, button').forEach(el => {
+//   el.setAttribute('draggable', 'false');
+// });
 
 // ========== TIME VALIDATION ==========
 function validateTime() {
@@ -213,7 +189,7 @@ function goToPage(pageNum) {
   if (currentPage === 3 && !typingFlags[3]) {
     startTyping(
       'message3',
-      "Happy Birthday, Sai! Wishing you the best this year and sana maabot mo pangarap mo.",
+      "Happy Birthday, Eden Ira! Wishing you the best this year and sana maabot mo pangarap mo. 💙",
       'nextMsg3Btn',
       3
     );
@@ -222,7 +198,7 @@ function goToPage(pageNum) {
   else if (currentPage === 4 && !typingFlags[5]) {
     startTyping(
       'typing',
-      "Hello! First of all, ginawa ko ’to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday kasi you are 19 years old living in this world, sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you a good health, and malusog.\n\nSana sa age mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy.\n\nHappy Birthday! 💖✨🎉",
+      "Hello! First of all, ginawa ko 'to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday! Sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you good health and happiness.\n\nSana sa edad mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy.\n\nHappy Birthday! 💙✨🎉",
       'nextTypingBtn',
       5
     );
@@ -244,7 +220,7 @@ function startCountdown() {
     if (distance <= 0) {
       clearInterval(timer);
 
-      isUnlocked = true; // 🔓 UNLOCK
+      isUnlocked = true;
       startFinalCountdown();
       return;
     }
@@ -337,24 +313,17 @@ function handleGiftOpen(e) {
 
   giftBox.addEventListener('animationend', () => {
     giftBox.style.display = 'none';
-    giftTitle.textContent = "Hope you loved your surprise! 💕";
+    giftTitle.textContent = "Hope you loved your surprise! 💙";
 
     if (!typingFlags[6]) {
       startTyping(
         'giftText',
-        "Surprise! 🎉 You are truly special and loved 💕",
+        "Surprise! 🎉 You are truly special and loved 💙",
         null,
         6
       );
     }
   }, { once: true });
-}
-
-// ========== THEME ==========
-function toggleTheme() {
-  document.body.classList.toggle('dark');
-  themeToggleBtn.textContent =
-    document.body.classList.contains('dark') ? "☀️" : "🌙";
 }
 
 // ========== SWIPE ==========
@@ -389,7 +358,6 @@ nextCakeBtn?.addEventListener('click', nextPage);
 nextMsg3Btn?.addEventListener('click', nextPage);
 nextTypingBtn?.addEventListener('click', nextPage);
 giftBox?.addEventListener('click', handleGiftOpen);
-themeToggleBtn?.addEventListener('click', toggleTheme);
 
 // ========== INIT ==========
 pages.forEach((page, index) => {
