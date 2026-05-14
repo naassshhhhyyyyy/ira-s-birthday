@@ -337,7 +337,7 @@ function handleGiftOpen(e) {
 
   giftBox.addEventListener('animationend', () => {
     giftBox.style.display = 'none';
-    giftTitle.textContent = "Hope you loved your surprise! 💕";
+    giftTitle.textContent = "Hope you loved my surprise! 💕";
 
     if (!typingFlags[6]) {
       startTyping(
