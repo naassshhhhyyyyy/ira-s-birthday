@@ -9,7 +9,7 @@ let cakeClicked = false;
 // 🔒 SECURITY
 let isUnlocked = false;
 let lastTimeCheck = Date.now();
-// const targetDate = new Date("May 19, 2026 00:00:00").getTime();
+//const targetDate = new Date("May 19, 2026 00:00:00").getTime();
 const targetDate = new Date().getTime() + 5000;
 
 // DOM elements
