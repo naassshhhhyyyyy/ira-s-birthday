@@ -213,7 +213,7 @@ function goToPage(pageNum) {
   if (currentPage === 3 && !typingFlags[3]) {
     startTyping(
       'message3',
-      "Happy Birthday, Sai! Wishing you the best this year and sana maabot mo pangarap mo.",
+      "Hi po! 👋\n\nHappy Birthday! 🎉 Sana masaya ang araw mo. PS: Ang ganda mo talaga. lagi naman. 💙",
       'nextMsg3Btn',
       3
     );
@@ -222,7 +222,7 @@ function goToPage(pageNum) {
   else if (currentPage === 4 && !typingFlags[5]) {
     startTyping(
       'typing',
-      "Hello! First of all, ginawa ko ’to na website greetings for you kasi it's common for me to give all my friends a website greetings. Anyways, Happy Birthday kasi you are 19 years old living in this world, sana maging masaya ka sa buhay mo kahit ngayong araw lang, wishing you a good health, and malusog.\n\nSana sa age mo ngayon, mas marami kang matutunang bagay at mas ma-enjoy mo pa ang life. Hindi man perfect ang araw-araw, sana lagi ka pa ring may dahilan para ngumiti at magpatuloy.\n\nHappy Birthday! 💖✨🎉",
+      "Eden Ira,\n\nHappy Birthday! 🎂\n\nUna sa lahat, gusto ko lang sabihin na ang saya ko na nakilala kita. Hindi ko alam kung paano sasabihin 'to ng maayos, pero lagi kitang naiisip. Tuwing nakikita kita, parang ang saya saya ng araw ko.\n\nGinawa ko 'tong website na 'to hindi lang dahil birthday mo, kundi dahil gusto kong gumawa ng something special para sa isang taong special para sa'kin. 💙\n\nSana ngayong birthday mo, maging masaya ka. Sana makuha mo lahat ng gusto mo. At sana... malaman mo na may isang tao na nababaliw na sa'yo. (Spoiler: ako 'yun HAHAHA)\n\nKidding aside (not really), gusto ko lang malaman mo na tuwing tatawa ka, napapangiti din ako. Tuwing magkikita tayo, nagiging maganda ang buong araw ko.\n\nSo ayun. Happy Birthday, Ira. 💙\n\nIngat ka palagi. 😊",
       'nextTypingBtn',
       5
     );
@@ -342,7 +342,7 @@ function handleGiftOpen(e) {
     if (!typingFlags[6]) {
       startTyping(
         'giftText',
-        "Surprise! 🎉 You are truly special and loved 💕",
+        "Ira, gusto ko lang malaman mo... ikaw yung favorite kong part ng araw ko. Sana maging masaya ka today. At sana mapasaya pa din kita sa susunod na mga araw. 💙✨",
         null,
         6
       );
