@@ -1,4 +1,3 @@
-// ========== STATE ==========
 let currentPage = 1;
 const pages = document.querySelectorAll('.page');
 const totalPages = pages.length;
