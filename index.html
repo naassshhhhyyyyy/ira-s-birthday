@@ -3,30 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Happy Birthday Eden Ira 🎂</title>
+  <title>Happy Birthday 🎂</title>
   <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="birthday.css">
+  <link rel="stylesheet" href="css/birthday.css">
 </head>
 <body>
-
-<!-- PASSCODE SCREEN -->
-<div class="passcode-screen" id="passcodeScreen">
-  <div class="passcode-card">
-    <div class="passcode-lock">🔒</div>
-    <h2 class="passcode-title">Enter Passcode</h2>
-    <p class="passcode-subtitle">to unlock the birthday surprise</p>
-    <div class="passcode-input-container">
-      <input type="password" id="passcodeInput" class="passcode-input" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="000000">
-    </div>
-    <div class="passcode-error" id="passcodeError">Wrong passcode. Try again.</div>
-    <button class="btn passcode-btn" id="unlockBtn">Unlock ✨</button>
-    <p class="passcode-hint">Hint: It's a special date 💙</p>
-  </div>
-</div>
-
-<!-- MAIN BIRTHDAY CONTENT (hidden initially) -->
-<div class="birthday-content" id="birthdayContent" style="display: none;">
 
 <button class="btn toggle" id="themeToggle">🌙</button>
 
@@ -52,7 +34,7 @@
   </div>
 </div>
 
-<!-- Page 4: Long Typing Message -->
+<!-- Page 5: Long Typing Message -->
 <div class="page" id="page4">
   <div class="card">
     <div id="typing" class="typing-long"></div>
@@ -60,10 +42,10 @@
   </div>
 </div>
 
-<!-- Page 5: Gift + Spotify typing -->
+<!-- Page 6: Gift + Spotify typing -->
 <div class="page" id="page5">
   <div class="card">
-    <h2 id="giftTitle">🎁 Tap the Gift 🎁</h2>
+    <h2 id="giftTitle">Tap the Gift 🎁</h2>
     <div id="giftBox" class="gift-box">🎁</div>
     <div id="giftText" class="typing-gift"></div>
     <div class="spotify-container" id="spotifyContainer">
@@ -76,8 +58,6 @@
   <source src="audio_chamber-music.mp3" type="audio/mpeg">
 </audio>
 
-</div>
-
-<script src="birthday.js"></script>
+<script src="js/birthday.js"></script>
 </body>
 </html>
