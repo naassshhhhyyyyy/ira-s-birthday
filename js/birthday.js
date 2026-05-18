@@ -57,7 +57,7 @@ function initBirthdayWebsite() {
   // 🔒 SECURITY - TESTING MODE (5 seconds from now)
   let isUnlocked = false;
   let lastTimeCheck = Date.now();
-  const targetDate = new Date().getTime() + 5000; // 5 seconds testing mode
+  const targetDate = new Date("May 19, 2026 00:00:00").getTime();
 
   // DOM elements
   const countEl = document.getElementById('count');
